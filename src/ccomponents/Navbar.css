@@ -1,0 +1,12 @@
+.hover:hover{
+    background-color: green;
+    color: white !important;
+    border-radius: 15%;
+}
+
+
+Link{
+    text-decoration: none;
+    color: #000;
+    
+}
