@@ -1,4 +1,4 @@
-let  data=
+export let  data=
 [
     {
       "userId": 1,
@@ -602,4 +602,4 @@ let  data=
     }
   ]
 
-  export default data;
+  // export default data;

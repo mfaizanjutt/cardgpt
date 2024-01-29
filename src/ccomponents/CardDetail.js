@@ -1,11 +1,14 @@
 // CardDetail.js
 import React from "react";
-import { useParams } from "react-router-dom";
-import data from "./Data";
+import { useLocation, useParams } from "react-router-dom";
+// import {data} from "./Data";
 
 const CardDetail = () => {
-  const { id } = useParams();
-  const card = data.find((item) => item.id == id);
+  const location=useLocation()
+  const myData=location.state.data
+console.log(location,"data---")
+  // const { id } = useParams();
+  // const card = data.find((item) => item.id == id);
 
   return (
     <div
@@ -16,10 +19,10 @@ const CardDetail = () => {
         borderRadius: "8px",
       }}
     >
-      <h3>{card.id}</h3>
-      <h3>{card.body}</h3>
-      <p>{card.userId}</p>
-      <p>{card.title}</p>
+      <h3>{myData.id}</h3>
+      <h3>{myData.body}</h3>
+      <p>{myData.userId}</p>
+      <p>{myData.title}</p>
     </div>
   );
 };
