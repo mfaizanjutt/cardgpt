@@ -7,12 +7,18 @@ import CardDetail from "./CardDetail";
 
 const CardList = () => {
   const [data, setData] = useState([]);
+  const [loader, setLoader] = useState(false)
+
+
 
   useEffect(() => {
+    setLoader(true)
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((data) => {
-        setData(data.slice(0, 10));
+        // setData(data.slice(0, 10));
+        setData(data);
+        setLoader(false)
       });
   }, []);
 
@@ -23,7 +29,9 @@ const CardList = () => {
       setData((prevData) => prevData.filter((_, i) => i !== index));
     }
   };
-
+if (loader) {
+  return <h1>loading</h1>
+}
   return (
     <div>
       <Navbar />

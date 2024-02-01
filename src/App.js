@@ -5,6 +5,7 @@ import CardList from "./ccomponents/CardList";
 import CardDetail from "./ccomponents/CardDetail";
 
 import "bootstrap/dist/css/bootstrap.css";
+import UserForm from "./ccomponents/UserForm";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<CardList />} />
+          <Route path="/userform" element={<UserForm />} />
           <Route path="/card/:id" element={<CardDetail />} />
         </Routes>
       </BrowserRouter>
