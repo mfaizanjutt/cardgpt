@@ -7,30 +7,45 @@ import CardDetail from "./CardDetail";
 
 const CardList = () => {
   const [data, setData] = useState([]);
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
+  const [start, setStart] = useState(0);
+  const [limit, setLimit] = useState(10);
 
-
-
-  useEffect(() => {
-    setLoader(true)
-    fetch("https://jsonplaceholder.typicode.com/posts")
+  const fetchData = () => {
+    setLoader(true);
+    fetch(`https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${limit}`)
       .then((response) => response.json())
       .then((data) => {
-        setData(data.slice(0,10));
-        setLoader(false)
+        setData(data);
+        setLoader(false);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [start, limit]);
 
   const handleDelete = (index) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this card?");
-    console.log(isConfirmed)
     if (isConfirmed) {
       setData((prevData) => prevData.filter((_, i) => i !== index));
     }
   };
-if (loader) {
-  return <h1>loading</h1>
-}
+
+  const handleNextPage = () => {
+    setStart(start + limit);
+  };
+
+  const handlePrevPage = () => {
+    if (start >= limit) {
+      setStart(start - limit);
+    }
+  };
+
+  if (loader) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div>
       <Navbar />
@@ -52,16 +67,19 @@ if (loader) {
             </div>
           </Link>
           <Link to={`/userForm`}>
-            <button>
-            Add using Form
-            </button>
+            <button>Add using Form</button>
           </Link>
           <button onClick={() => handleDelete(index)}>Delete Card</button>
         </div>
       ))}
+      <div>
+        <button onClick={handlePrevPage} disabled={start === 0}>
+          Previous Page
+        </button>
+        <button onClick={handleNextPage}>Next Page</button>
+      </div>
     </div>
   );
 };
-
 
 export default CardList;
