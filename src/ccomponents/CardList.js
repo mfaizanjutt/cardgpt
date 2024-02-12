@@ -16,8 +16,7 @@ const CardList = () => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((data) => {
-        // setData(data.slice(0, 10));
-        setData(data);
+        setData(data.slice(0,10));
         setLoader(false)
       });
   }, []);
@@ -51,6 +50,11 @@ if (loader) {
               <h3>{item.id}</h3>
               <p>{item.title}</p>
             </div>
+          </Link>
+          <Link to={`/userForm`}>
+            <button>
+            Add using Form
+            </button>
           </Link>
           <button onClick={() => handleDelete(index)}>Delete Card</button>
         </div>
